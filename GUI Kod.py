@@ -3,7 +3,9 @@ from tkinter import *
 from PIL import Image, ImageTk
 import random
 
-class gracz():
+root = Tk()
+
+class Gracz():
 
     def __init__(self):
         self.talia = ["walet", "dama", "król", "szóstka", "siódemka", "ósemka", "dziewiątka", "dziesiątka", "as"]
@@ -34,25 +36,88 @@ class gracz():
         else:
             self.punkty_gracza += 11
 
+gracz = Gracz()
+komputer = Gracz()
+
+#klasa okna z grą
+class GameMainWindow():
+    def __init__(self):
+        self.punkty_gracza_var = StringVar()
+        self.punkty_gracza_var.set(str(gracz.punkty_gracza))
+        self.duze_punkty_gracza_var = StringVar()
+        self.duze_punkty_gracza_var.set(str(gracz.duze_pkt_gracza))
+
+        self.punkty_komputera_var = StringVar()
+        self.punkty_komputera_var.set(str(komputer.punkty_gracza))
+        self.duze_punkty_komputera_var = StringVar()
+        self.duze_punkty_komputera_var.set(str(komputer.duze_pkt_gracza))
+
+
 ### Otwieranie okna z grą
-def open_main_game_window():
-    main_game_window = Toplevel(root)
-    main_game_window.title("Gra w Oczko")
-    main_game_window.geometry("1980x1080")
-    main_game_window.configure(background = 'black')
-    Label(main_game_window, image = background_image).place(relwidth = 1, relheight = 1)
+    def open_main_game_window(self):
+        main_game_window = Toplevel(root)
+        main_game_window.title("Gra w Oczko")
+        main_game_window.geometry("1980x1080")
+        main_game_window.configure(background = 'black')
+        Label(main_game_window, image = background_image).place(relwidth = 1, relheight = 1)
 
-### logo
-    logo_photo = Label(main_game_window, image = logo, background = 'black')
-    logo_photo.pack()
+#Punkty i talia gracza
+        punkty_gracza_tekst = Label(main_game_window, text= "Punkty gracza:", font =("Times New Roman", 20), foreground = "white", background = "black")
+        punkty_gracza_tekst.place(x=28, y=28)
+        punkty_gracza = Label(main_game_window, textvariable=self.punkty_gracza_var, font =("Times New Roman", 20), foreground = "white", background = "black")
+        punkty_gracza.place(x=228, y=28)
 
-### Przyciski
-    start_game_button = Button(main_game_window, image = button3, background = 'black', overrelief = FLAT)
-    start_game_button.pack(side = TOP)
-    taking_card_button = Button(main_game_window, image = button4, background = 'black', overrelief = FLAT)
-    taking_card_button.pack(side = RIGHT)
-    checking_button = Button(main_game_window, image = button5, background = 'black', overrelief = FLAT)
-    checking_button.pack(side = RIGHT)
+        duze_punkty_gracza_tekst = Label(main_game_window, text = "Duże punkty gracza:", font =("Times New Roman", 20), foreground = "white", background = "black")
+        duze_punkty_gracza_tekst.place(x=800, y=28)
+        duze_punkty_gracza = Label(main_game_window, textvariable=self.duze_punkty_gracza_var, font =("Times New Roman", 20), foreground ="white", background ="black")
+        duze_punkty_gracza.place(x=1050, y=28)
+
+        #talia gracza tu będzie
+
+        #Punkty i talia komputera
+        punkty_komputera_tekst = Label(main_game_window, text= "Punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
+        punkty_komputera_tekst.place(x=28, y=400)
+        punkty_komputera = Label(main_game_window, textvariable =self.punkty_komputera_var, font =("Times New Roman", 20), foreground = "white", background = "black")
+        punkty_komputera.place(x=258, y=400)
+
+        duze_punkty_komputera_tekst = Label(main_game_window, text = "Duże punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
+        duze_punkty_komputera_tekst.place(x=800, y=400)
+        duze_punkty_komputera = Label(main_game_window, textvariable=self.duze_punkty_komputera_var, font =("Times New Roman", 20), foreground ="white", background ="black")
+        duze_punkty_komputera.place(x=1050, y=400)
+
+        # talia komputera bedzie tutaj
+
+
+        ### Przyciski w oknie gry
+        taking_card_button = Button(main_game_window, command = self.take_card, image = button4, background ='black', overrelief = FLAT)
+        taking_card_button.pack(side = BOTTOM)
+
+        checking_button = Button(main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
+        checking_button.pack(side = BOTTOM)
+
+    # funkcja dobierz karte w oknie gry
+    def take_card(self):
+        gracz.wylosuj_karte()
+        if komputer.punkty_gracza < 21:
+            komputer.wylosuj_karte()
+        self.punkty_gracza_var.set(str(gracz.punkty_gracza))
+        self.punkty_komputera_var.set(str(komputer.punkty_gracza))
+
+    #funkcja sprawdz w oknie gry
+    def check_out(self):
+        while komputer.punkty_gracza < 21:
+            komputer.wylosuj_karte()
+        self.punkty_komputera_var.set(str(komputer.punkty_gracza))
+
+        # TUTAJ BEDA WARUNKI AKA KIEDY GRACZ A KIEDY KOMPUTER DOSTANIE DUZY PUNKT
+
+        # [...]
+
+
+
+gameMainWindow = GameMainWindow()
+
+
 
 ### Otwieranie okna z zasadami gry
 def open_game_rules_window():
