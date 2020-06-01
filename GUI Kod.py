@@ -8,7 +8,7 @@ root = Tk()
 class Gracz():
 
     def __init__(self):
-        self.talia = ["walet", "dama", "król", "szóstka", "siódemka", "ósemka", "dziewiątka", "dziesiątka", "as"]
+        self.talia = ["walet", "dama", "król", "dziewiątka", "dziesiątka", "as"]
         self.punkty_gracza = 0
         self.duze_pkt_gracza = 0
         self.talia_gracza = []
@@ -23,12 +23,6 @@ class Gracz():
             self.punkty_gracza += 3
         elif self.los == "król":
             self.punkty_gracza += 4
-        elif self.los == "szóstka":
-            self.punkty_gracza += 6
-        elif self.los == "siódemka":
-            self.punkty_gracza += 7
-        elif self.los == "ósemka":
-            self.punkty_gracza += 8
         elif self.los == "dziewiątka":
             self.punkty_gracza += 9
         elif self.los == "dziesiątka":
@@ -65,7 +59,7 @@ class GameMainWindow():
         punkty_gracza_tekst = Label(main_game_window, text= "Punkty gracza:", font =("Times New Roman", 20), foreground = "white", background = "black")
         punkty_gracza_tekst.place(x=28, y=28)
         punkty_gracza = Label(main_game_window, textvariable=self.punkty_gracza_var, font =("Times New Roman", 20), foreground = "white", background = "black")
-        punkty_gracza.place(x=228, y=28)
+        punkty_gracza.place(x=210, y=28)
 
         duze_punkty_gracza_tekst = Label(main_game_window, text = "Duże punkty gracza:", font =("Times New Roman", 20), foreground = "white", background = "black")
         duze_punkty_gracza_tekst.place(x=800, y=28)
@@ -78,12 +72,12 @@ class GameMainWindow():
         punkty_komputera_tekst = Label(main_game_window, text= "Punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
         punkty_komputera_tekst.place(x=28, y=400)
         punkty_komputera = Label(main_game_window, textvariable =self.punkty_komputera_var, font =("Times New Roman", 20), foreground = "white", background = "black")
-        punkty_komputera.place(x=258, y=400)
+        punkty_komputera.place(x=250, y=400)
 
         duze_punkty_komputera_tekst = Label(main_game_window, text = "Duże punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
         duze_punkty_komputera_tekst.place(x=800, y=400)
         duze_punkty_komputera = Label(main_game_window, textvariable=self.duze_punkty_komputera_var, font =("Times New Roman", 20), foreground ="white", background ="black")
-        duze_punkty_komputera.place(x=1050, y=400)
+        duze_punkty_komputera.place(x=1100, y=400)
 
         # talia komputera bedzie tutaj
 
