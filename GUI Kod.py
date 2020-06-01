@@ -67,6 +67,12 @@ class GameMainWindow():
         duze_punkty_gracza.place(x=1050, y=28)
 
         #talia gracza tu będzie
+        pierwsza_karta_gracza = Label(main_game_window, image= nine_t ,background = "black")
+        pierwsza_karta_gracza.place(x=28, y=100)
+
+
+
+
 
         #Punkty i talia komputera
         punkty_komputera_tekst = Label(main_game_window, text= "Punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
@@ -148,7 +154,7 @@ button4 = PhotoImage(file = 'images/button_dobierz.png')
 button5 = PhotoImage(file = 'images/button_sprawdz.png')
 
 ### Pobieranie obrazków kart
-nine_t = PhotoImage(file = 'images/9-trefl.png')
+nine_t = PhotoImage(file = 'images/9-trefl.jpg')
 ten_t = PhotoImage(file = 'images/10-trefl.png')
 W_t = PhotoImage(file = 'images/walet-trefl.png')
 D_t = PhotoImage(file = 'images/dama-trefl.png')
