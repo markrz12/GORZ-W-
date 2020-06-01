@@ -137,7 +137,6 @@ def open_game_rules_window():
     authors = Label(game_rules_window, text = 'Twórcy: Krzemińska M., Moryson J., Gawęcka P., Gbur K.', foreground = 'white', background = 'black')
     authors.pack(side = BOTTOM)
 
-root=Tk()
 root.geometry('500x500')
 root.title('Zacznij Grę w Oczko!')
 root.configure(background = "black")
@@ -186,7 +185,7 @@ logo_photo = Label(root, image = logo, background = 'black')
 logo_photo.pack(fill = BOTH)
 
 ### Przyciski w głównym oknie
-starting_button = Button(root, image = button1, command = open_main_game_window, background = 'black', overrelief = FLAT)
+starting_button = Button(root, image = button1, command = gameMainWindow.open_main_game_window, background = 'black', overrelief = FLAT)
 starting_button.pack(side = TOP)
 
 gamerules_button = Button(root, image = button2, command = open_game_rules_window, background = 'black', overrelief = FLAT)
