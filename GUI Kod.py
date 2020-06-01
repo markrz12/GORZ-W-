@@ -114,9 +114,7 @@ class GameMainWindow():
         # [...]
 
 
-
 gameMainWindow = GameMainWindow()
-
 
 
 ### Otwieranie okna z zasadami gry
