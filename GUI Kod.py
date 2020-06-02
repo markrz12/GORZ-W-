@@ -13,10 +13,10 @@ class Gracz():
         self.talia_gracza = []
 
     def wylosuj_karte(self, talia):           # dzięki temu karty nie będą się powtarzać
-        self.los = random.choice(talia)
-        talia.remove(self.los)
-        self.talia_gracza.append(self.los)
-        return talia
+        los = random.choice(talia)
+        talia.remove(los)
+        self.talia_gracza.append(los)
+        return los
 
     def zliczanie(self):        # tu zliczamy punkty na kazdej rece
         self.punkty_gracza = 0
@@ -34,15 +34,16 @@ class Gracz():
             else:               # Tu sa asy
                 self.punkty_gracza += 11
 
-                
-        if len(self.talia_gracza) == 2 and self.punkty_gracza == 22:      # ten fragment nie musi być koniecznie tutaj, i napisany brzydko jest
-            print("Perskie oko - wygrałeś")
-        elif self.punkty_gracza == 21:
-            print("Oczko - wygrałeś")
-        elif self.punkty_gracza > 21:
-            print("Przekroczyłeś maksymalną liczbe punktów - przegrałeś")
-        else:
-            print("Masz", self.punty_gracza, "punktów. Możesz dobrać kartę lub spasować")
+        #
+        # if len(self.talia_gracza) == 2 and self.punkty_gracza == 22:      # ten fragment nie musi być koniecznie tutaj, i napisany brzydko jest
+        #     print("Perskie oko - wygrałeś")
+        # elif self.punkty_gracza == 21:
+        #     print("Oczko - wygrałeś")
+        # elif self.punkty_gracza > 21:
+        #     print("Przekroczyłeś maksymalną liczbe punktów - przegrałeś")
+        # else:
+        #     print("Masz", self.punty_gracza, "punktów. Możesz dobrać kartę lub spasować")
+        return self.punkty_gracza
 
 karty = ["9_t", "10_t", "W_t", "D_t", "K_t", "A_t", "9_ka", "10_ka", "W_ka", "D_ka", "K_ka", "A_ka", "9_ki", "10_ki", "W_ki", "D_ki", "K_ki", "A_ki", "9_p", "10_p", "W_p", "D_p", "K_p", "A_p"]
 gracz = Gracz()
@@ -106,19 +107,21 @@ class GameMainWindow():
 
     # funkcja dobierz karte w oknie gry
     def take_card(self):
-        gracz.wylosuj_karte()
+        karta = gracz.wylosuj_karte(karty)
+        gracz.zliczanie()
         # narysuj karte gracza
         pierwsza_karta_gracza = Label(self.main_game_window, image = nine_t ,background = "black")
         pierwsza_karta_gracza.place(x=28, y=75)
         if komputer.punkty_gracza < 21:
-            komputer.wylosuj_karte()
+            komputer.wylosuj_karte(karty)
+            komputer.zliczanie()
         self.punkty_gracza_var.set(str(gracz.punkty_gracza))
         self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
     #funkcja sprawdz w oknie gry
     def check_out(self):
         while komputer.punkty_gracza < 21:
-            komputer.wylosuj_karte()
+            komputer.wylosuj_karte(karty)
         self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
         # TUTAJ BEDA WARUNKI AKA KIEDY GRACZ A KIEDY KOMPUTER DOSTANIE DUZY PUNKT
