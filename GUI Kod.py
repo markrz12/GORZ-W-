@@ -45,7 +45,10 @@ class Gracz():
         #     print("Masz", self.punty_gracza, "punktów. Możesz dobrać kartę lub spasować")
         return self.punkty_gracza
 
-karty = ["9_t", "10_t", "W_t", "D_t", "K_t", "A_t", "9_ka", "10_ka", "W_ka", "D_ka", "K_ka", "A_ka", "9_ki", "10_ki", "W_ki", "D_ki", "K_ki", "A_ki", "9_p", "10_p", "W_p", "D_p", "K_p", "A_p"]
+karty = ["9_t", "10_t", "W_t", "D_t", "K_t", "A_t",
+"9_ka", "10_ka", "W_ka", "D_ka", "K_ka", "A_ka",
+"9_ki", "10_ki", "W_ki", "D_ki", "K_ki", "A_ki",
+"9_p", "10_p", "W_p", "D_p", "K_p", "A_p"]
 gracz = Gracz()
 komputer = Gracz()
 
@@ -93,11 +96,6 @@ class GameMainWindow():
         duze_punkty_komputera = Label(self.main_game_window, textvariable=self.duze_punkty_komputera_var, font =("Times New Roman", 20), foreground ="white", background ="black")
         duze_punkty_komputera.place(x=1100, y=400)
 
-        # talia komputera bedzie tutaj
-        pierwsza_karta_komputera = Label(self.main_game_window, image= nine_t ,background = "black")
-        pierwsza_karta_komputera.place(x=28, y=450)
-
-
         ### Przyciski w oknie gry
         taking_card_button = Button(self.main_game_window, command = self.take_card, image = button4, background ='black', overrelief = FLAT)
         taking_card_button.pack(side = BOTTOM)
@@ -107,21 +105,28 @@ class GameMainWindow():
 
     # funkcja dobierz karte w oknie gry
     def take_card(self):
-        karta = gracz.wylosuj_karte(karty)
+        karta_gracza = gracz.wylosuj_karte(karty)
         gracz.zliczanie()
         # narysuj karte gracza
-        pierwsza_karta_gracza = Label(self.main_game_window, image = nine_t ,background = "black")
-        pierwsza_karta_gracza.place(x=28, y=75)
+        pierwsza_karta_gracza = Label(self.main_game_window, image = obrazek_dla_karty(karta_gracza) ,background = "black")
+        pierwsza_karta_gracza.place(x= len(gracz.talia_gracza)*50, y=75)
+
         if komputer.punkty_gracza < 21:
-            komputer.wylosuj_karte(karty)
+            karta_komputera= komputer.wylosuj_karte(karty)
             komputer.zliczanie()
+            # talia komputera bedzie tutaj
+            pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
+            pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
         self.punkty_gracza_var.set(str(gracz.punkty_gracza))
         self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
     #funkcja sprawdz w oknie gry
     def check_out(self):
         while komputer.punkty_gracza < 21:
-            komputer.wylosuj_karte(karty)
+            karta_komputera = komputer.wylosuj_karte(karty)
+            komputer.zliczanie()
+            pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
+            pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
         self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
         # TUTAJ BEDA WARUNKI AKA KIEDY GRACZ A KIEDY KOMPUTER DOSTANIE DUZY PUNKT
@@ -194,6 +199,58 @@ D_p = PhotoImage(file = 'images/dama-pik.png')
 K_p = PhotoImage(file = 'images/krol-pik.png')
 A_p = PhotoImage(file = 'images/as-pik.png')
 druga_strona = PhotoImage(file = 'images/druga-strona.png')
+
+### Zwroc obazek dla karty
+def obrazek_dla_karty(karta):
+    print(karta)
+    if karta == "9_t":
+         return nine_t
+    elif karta == "10_t":
+         return ten_t
+    elif karta == "W_t":
+        return W_t
+    elif karta == "D_t":
+        return D_t
+    elif karta == "K_t":
+        return K_t
+    elif karta == "A_t":
+        return A_t
+    elif karta == "9_ka":
+         return nine_ka
+    elif karta == "10_ka":
+         return ten_ka
+    elif karta == "W_ka":
+        return W_ka
+    elif karta == "D_ka":
+        return D_ka
+    elif karta == "K_ka":
+        return K_ka
+    elif karta == "A_ka":
+        return A_ka
+    elif karta == "9_ki":
+         return nine_ki
+    elif karta == "10_ki":
+         return ten_ki
+    elif karta == "W_ki":
+        return W_ki
+    elif karta == "D_ki":
+        return D_ki
+    elif karta == "K_ki":
+        return K_ki
+    elif karta == "A_ki":
+        return A_ki
+    elif karta == "9_p":
+         return nine_p
+    elif karta == "10_p":
+         return ten_p
+    elif karta == "W_p":
+        return W_p
+    elif karta == "D_p":
+        return D_p
+    elif karta == "K_p":
+        return K_p
+    elif karta == "A_p":
+        return A_p
 
 ### Wyświetlanie logo
 logo_photo = Label(root, image = logo, background = 'black')
