@@ -105,29 +105,31 @@ class GameMainWindow():
 
     # funkcja dobierz karte w oknie gry
     def take_card(self):
-        karta_gracza = gracz.wylosuj_karte(karty)
-        gracz.zliczanie()
-        # narysuj karte gracza
-        pierwsza_karta_gracza = Label(self.main_game_window, image = obrazek_dla_karty(karta_gracza) ,background = "black")
-        pierwsza_karta_gracza.place(x= len(gracz.talia_gracza)*50, y=75)
+        if len(karty) >0:
+            karta_gracza = gracz.wylosuj_karte(karty)
+            gracz.zliczanie()
+            # narysuj karte gracza
+            pierwsza_karta_gracza = Label(self.main_game_window, image = obrazek_dla_karty(karta_gracza) ,background = "black")
+            pierwsza_karta_gracza.place(x= len(gracz.talia_gracza)*50, y=75)
 
-        if komputer.punkty_gracza < 21:
-            karta_komputera= komputer.wylosuj_karte(karty)
-            komputer.zliczanie()
-            # talia komputera bedzie tutaj
-            pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
-            pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
-        self.punkty_gracza_var.set(str(gracz.punkty_gracza))
-        self.punkty_komputera_var.set(str(komputer.punkty_gracza))
+            if komputer.punkty_gracza < 21:
+                karta_komputera= komputer.wylosuj_karte(karty)
+                komputer.zliczanie()
+                # talia komputera bedzie tutaj
+                pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
+                pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
+            self.punkty_gracza_var.set(str(gracz.punkty_gracza))
+            self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
     #funkcja sprawdz w oknie gry
     def check_out(self):
-        while komputer.punkty_gracza < 21:
-            karta_komputera = komputer.wylosuj_karte(karty)
-            komputer.zliczanie()
-            pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
-            pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
-        self.punkty_komputera_var.set(str(komputer.punkty_gracza))
+        if len(karty)>0:
+            while komputer.punkty_gracza < 21:
+                karta_komputera = komputer.wylosuj_karte(karty)
+                komputer.zliczanie()
+                pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
+                pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
+            self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
         # TUTAJ BEDA WARUNKI AKA KIEDY GRACZ A KIEDY KOMPUTER DOSTANIE DUZY PUNKT
 
@@ -202,7 +204,6 @@ druga_strona = PhotoImage(file = 'images/druga-strona.png')
 
 ### Zwroc obazek dla karty
 def obrazek_dla_karty(karta):
-    print(karta)
     if karta == "9_t":
          return nine_t
     elif karta == "10_t":
