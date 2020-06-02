@@ -2,6 +2,8 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import random
+import time
+from tkinter import messagebox
 
 root = Tk()
 
@@ -97,22 +99,59 @@ class GameMainWindow():
         duze_punkty_komputera.place(x=1100, y=400)
 
         ### Przyciski w oknie gry
-        taking_card_button = Button(self.main_game_window, command = self.take_card, image = button4, background ='black', overrelief = FLAT)
-        taking_card_button.pack(side = BOTTOM)
+        self.taking_card_button = Button(self.main_game_window, command = self.take_card, image = button4, background ='black', overrelief = FLAT)
+        self.taking_card_button.pack(side = BOTTOM)
 
-        checking_button = Button(self.main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
-        checking_button.pack(side = BOTTOM)
+        self.checking_button = Button(self.main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
+        self.checking_button.pack(side = BOTTOM)
+
+    # zerowanie zwykłych punktów i kart, widocznych na ekranie po nowej rozgrywce
+
+    def zerowanie(self):
+        time.sleep(1) #żeby było widać, co zniknie, nim zniknie
+        gracz.punkty_gracza = 0
+        komputer.punkty_gracza = 0
+        gracz.talia_gracza = []
+        komputer.talia_gracza = []
+        # W tym przypadku karty z poprzedniej rozgrywki nie znikają, a na nie nakładają się nowe. Może wiecie jak usunąć Label, który jest pod spodem? :<
+        # Szybko też kończy się talia. Trzeba chyba dodawać nową przy każdej rozgrywce po nowym dużym punkcie
+
+    # dodawanie dużego punktu
+
+    def duze_punkty_dodawanie(self,gracz,komputer):
+        if gracz.punkty_gracza == 21:
+            gracz.duze_pkt_gracza += 1
+            self.zerowanie()
+        elif gracz.punkty_gracza > 21:
+            komputer.duze_pkt_gracza += 1
+            self.zerowanie()
+        else:
+            True
+
+        if komputer.punkty_gracza == 21:
+            komputer.duze_pkt_gracza += 1
+            self.zerowanie()
+        elif komputer.punkty_gracza > 21:
+            gracz.duze_pkt_gracza += 1
+            self.zerowanie()
+        else:
+            True
+
+        self.punkty_gracza_var.set(str(gracz.punkty_gracza))
+        self.punkty_komputera_var.set(str(komputer.punkty_gracza))
+        self.duze_punkty_gracza_var.set(str(gracz.duze_pkt_gracza))
+        self.duze_punkty_komputera_var.set(str(komputer.duze_pkt_gracza))
 
     # funkcja dobierz karte w oknie gry
     def take_card(self):
-        if len(karty) >0:
+        if len(karty) > 0:
             karta_gracza = gracz.wylosuj_karte(karty)
             gracz.zliczanie()
             # narysuj karte gracza
             pierwsza_karta_gracza = Label(self.main_game_window, image = obrazek_dla_karty(karta_gracza) ,background = "black")
             pierwsza_karta_gracza.place(x= len(gracz.talia_gracza)*50, y=75)
 
-            if komputer.punkty_gracza < 21:
+            if komputer.punkty_gracza < 18: #Zmieniłam na 18, bo w zasadach jest, że nie dobiera już od 18 pkt.
                 karta_komputera= komputer.wylosuj_karte(karty)
                 komputer.zliczanie()
                 # talia komputera bedzie tutaj
@@ -121,20 +160,38 @@ class GameMainWindow():
             self.punkty_gracza_var.set(str(gracz.punkty_gracza))
             self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
+            self.duze_punkty_dodawanie(gracz,komputer)
+
+            if gracz.duze_pkt_gracza == 21:
+                messagebox.showinfo("Wygrana!","Zdobyłeś 21 dużych punktów!")
+                self.checking_button['state'] = DISABLED
+                self.taking_card_button['state'] = DISABLED
+            if komputer.duze_pkt_gracza == 21:
+                messagebox.showinfo("Przegrałeś!","Komputer zdobył 21 dużych punktów przed tobą!")
+                self.checking_button['state'] = DISABLED
+                self.taking_card_button['state'] = DISABLED
+
+
     #funkcja sprawdz w oknie gry
     def check_out(self):
         if len(karty)>0:
-            while komputer.punkty_gracza < 21:
+            while komputer.punkty_gracza < 18:
                 karta_komputera = komputer.wylosuj_karte(karty)
                 komputer.zliczanie()
                 pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
                 pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
             self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
-        # TUTAJ BEDA WARUNKI AKA KIEDY GRACZ A KIEDY KOMPUTER DOSTANIE DUZY PUNKT
+        self.duze_punkty_dodawanie(gracz,komputer)
 
-        # [...]
-
+        if gracz.duze_pkt_gracza == 21:
+            messagebox.showinfo("Wygrana!","Zdobyłeś 21 dużych punktów!")
+            self.checking_button['state'] = DISABLED
+            self.taking_card_button['state'] = DISABLED
+        if komputer.duze_pkt_gracza == 21:
+            messagebox.showinfo("Przegrałeś!","Komputer zdobył 21 dużych punktów przed tobą!")
+            self.checking_button['state'] = DISABLED
+            self.taking_card_button['state'] = DISABLED
 
 gameMainWindow = GameMainWindow()
 
