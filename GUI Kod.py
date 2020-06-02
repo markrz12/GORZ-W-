@@ -42,7 +42,7 @@ class Gracz():
         elif self.punkty_gracza > 21:
             print("Przekroczyłeś maksymalną liczbe punktów - przegrałeś")
         else:
-            print("Możesz dobrać kartę lub spasować")
+            print("Masz", self.punty_gracza, "punktów. Możesz dobrać kartę lub spasować")
 
 karty = ["9_t", "10_t", "W_t", "D_t", "K_t", "A_t", "9_ka", "10_ka", "W_ka", "D_ka", "K_ka", "A_ka", "9_ki", "10_ki", "W_ki", "D_ki", "K_ki", "A_ki", "9_p", "10_p", "W_p", "D_p", "K_p", "A_p"]
 gracz = Gracz()
