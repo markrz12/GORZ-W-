@@ -8,28 +8,43 @@ root = Tk()
 class Gracz():
 
     def __init__(self):
-        self.talia = ["walet", "dama", "król", "dziewiątka", "dziesiątka", "as"]
         self.punkty_gracza = 0
         self.duze_pkt_gracza = 0
         self.talia_gracza = []
 
-    def wylosuj_karte(self):
-        self.los = random.choice(self.talia)
+    def wylosuj_karte(self, talia):           # dzięki temu karty nie będą się powtarzać
+        self.los = random.choice(talia)
+        talia.remove(self.los)
         self.talia_gracza.append(self.los)
+        return talia
 
-        if self.los == "walet":
-            self.punkty_gracza += 2
-        elif self.los == "dama":
-            self.punkty_gracza += 3
-        elif self.los == "król":
-            self.punkty_gracza += 4
-        elif self.los == "dziewiątka":
-            self.punkty_gracza += 9
-        elif self.los == "dziesiątka":
-            self.punkty_gracza += 10
+    def zliczanie(self):        # tu zliczamy punkty na kazdej rece
+        self.punkty_gracza = 0
+        for i in self.talia_gracza:
+            if i == "9_t" or i == "9_ka" or i == "9_ki" or i == "9_p":
+                self.punkty_gracza += 0
+            elif i == "10_t" or i == "10_ka" or i == "10_ki" or i == "10_p":
+                self.punkty_gracza += 10
+            elif i == "W_t" or i == "W_ka" or i == "W_ki" or i == "W_p":
+                self.punkty_gracza += 2
+            elif i == "D_t" or i == "D_ka" or i == "D_ki" or i == "D_p":
+                self.punkty_gracza += 3
+            elif i == "K_t" or i == "K_ka" or i == "K_ki" or i == "K_p":
+                self.punkty_gracza += 4
+            else:               # Tu sa asy
+                self.punkty_gracza += 11
+
+                
+        if len(self.talia_gracza) == 2 and self.punkty_gracza == 22:      # ten fragment nie musi być koniecznie tutaj, i napisany brzydko jest
+            print("Perskie oko - wygrałeś")
+        elif self.punkty_gracza == 21:
+            print("Oczko - wygrałeś")
+        elif self.punkty_gracza > 21:
+            print("Przekroczyłeś maksymalną liczbe punktów - przegrałeś")
         else:
-            self.punkty_gracza += 11
+            print("Możesz dobrać kartę lub spasować")
 
+karty = ["9_t", "10_t", "W_t", "D_t", "K_t", "A_t", "9_ka", "10_ka", "W_ka", "D_ka", "K_ka", "A_ka", "9_ki", "10_ki", "W_ki", "D_ki", "K_ki", "A_ki", "9_p", "10_p", "W_p", "D_p", "K_p", "A_p"]
 gracz = Gracz()
 komputer = Gracz()
 
