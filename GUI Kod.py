@@ -49,57 +49,52 @@ class GameMainWindow():
 
 ### Otwieranie okna z grą
     def open_main_game_window(self):
-        main_game_window = Toplevel(root)
-        main_game_window.title("Gra w Oczko")
-        main_game_window.geometry("1980x1080")
-        main_game_window.configure(background = 'black')
-        Label(main_game_window, image = background_image).place(relwidth = 1, relheight = 1)
+        self.main_game_window = Toplevel(root)
+        self.main_game_window.title("Gra w Oczko")
+        self.main_game_window.geometry("1980x1080")
+        self.main_game_window.configure(background = 'black')
+        Label(self.main_game_window, image = background_image).place(relwidth = 1, relheight = 1)
 
-#Punkty i talia gracza
-        punkty_gracza_tekst = Label(main_game_window, text= "Punkty gracza:", font =("Times New Roman", 20), foreground = "white", background = "black")
+        #Punkty i talia gracza
+        punkty_gracza_tekst = Label(self.main_game_window, text= "Punkty gracza:", font =("Times New Roman", 20), foreground = "white", background = "black")
         punkty_gracza_tekst.place(x=28, y=28)
-        punkty_gracza = Label(main_game_window, textvariable=self.punkty_gracza_var, font =("Times New Roman", 20), foreground = "white", background = "black")
+        punkty_gracza = Label(self.main_game_window, textvariable=self.punkty_gracza_var, font =("Times New Roman", 20), foreground = "white", background = "black")
         punkty_gracza.place(x=210, y=28)
 
-        duze_punkty_gracza_tekst = Label(main_game_window, text = "Duże punkty gracza:", font =("Times New Roman", 20), foreground = "white", background = "black")
+        duze_punkty_gracza_tekst = Label(self.main_game_window, text = "Duże punkty gracza:", font =("Times New Roman", 20), foreground = "white", background = "black")
         duze_punkty_gracza_tekst.place(x=800, y=28)
-        duze_punkty_gracza = Label(main_game_window, textvariable=self.duze_punkty_gracza_var, font =("Times New Roman", 20), foreground ="white", background ="black")
+        duze_punkty_gracza = Label(self.main_game_window, textvariable=self.duze_punkty_gracza_var, font =("Times New Roman", 20), foreground ="white", background ="black")
         duze_punkty_gracza.place(x=1050, y=28)
 
-        #talia gracza tu będzie
-        pierwsza_karta_gracza = Label(main_game_window, image= nine_t ,background = "black")
-        pierwsza_karta_gracza.place(x=28, y=75)
-
-
-
-
-
         #Punkty i talia komputera
-        punkty_komputera_tekst = Label(main_game_window, text= "Punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
+        punkty_komputera_tekst = Label(self.main_game_window, text= "Punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
         punkty_komputera_tekst.place(x=28, y=400)
-        punkty_komputera = Label(main_game_window, textvariable =self.punkty_komputera_var, font =("Times New Roman", 20), foreground = "white", background = "black")
+        punkty_komputera = Label(self.main_game_window, textvariable =self.punkty_komputera_var, font =("Times New Roman", 20), foreground = "white", background = "black")
         punkty_komputera.place(x=250, y=400)
 
-        duze_punkty_komputera_tekst = Label(main_game_window, text = "Duże punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
+        duze_punkty_komputera_tekst = Label(self.main_game_window, text = "Duże punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
         duze_punkty_komputera_tekst.place(x=800, y=400)
-        duze_punkty_komputera = Label(main_game_window, textvariable=self.duze_punkty_komputera_var, font =("Times New Roman", 20), foreground ="white", background ="black")
+        duze_punkty_komputera = Label(self.main_game_window, textvariable=self.duze_punkty_komputera_var, font =("Times New Roman", 20), foreground ="white", background ="black")
         duze_punkty_komputera.place(x=1100, y=400)
 
         # talia komputera bedzie tutaj
-        pierwsza_karta_komputera = Label(main_game_window, image= nine_t ,background = "black")
+        pierwsza_karta_komputera = Label(self.main_game_window, image= nine_t ,background = "black")
         pierwsza_karta_komputera.place(x=28, y=450)
 
 
         ### Przyciski w oknie gry
-        taking_card_button = Button(main_game_window, command = self.take_card, image = button4, background ='black', overrelief = FLAT)
+        taking_card_button = Button(self.main_game_window, command = self.take_card, image = button4, background ='black', overrelief = FLAT)
         taking_card_button.pack(side = BOTTOM)
 
-        checking_button = Button(main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
+        checking_button = Button(self.main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
         checking_button.pack(side = BOTTOM)
 
     # funkcja dobierz karte w oknie gry
     def take_card(self):
         gracz.wylosuj_karte()
+        # narysuj karte gracza
+        pierwsza_karta_gracza = Label(self.main_game_window, image = nine_t ,background = "black")
+        pierwsza_karta_gracza.place(x=28, y=75)
         if komputer.punkty_gracza < 21:
             komputer.wylosuj_karte()
         self.punkty_gracza_var.set(str(gracz.punkty_gracza))
