@@ -147,8 +147,7 @@ class GameMainWindow():
         self.duze_punkty_komputera_var.set(str(komputer.duze_pkt_gracza))
 
     def odliczanie_czasu(self):
-        time.time()
-        if time.time() - self.start >= 3600:
+        if time.time() - self.start >= 10:
             if gracz.duze_pkt_gracza > komputer.duze_pkt_gracza:
                 messagebox.showinfo("Koniec Czasu! Wygrana!","Skończył się czas. Masz więcej dużych punktów od komputera!")
                 self.checking_button['state'] = DISABLED
