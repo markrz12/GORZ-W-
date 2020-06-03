@@ -197,14 +197,21 @@ class GameMainWindow():
     def check_out(self):
         self.odliczanie_czasu()
         if len(karty)>0:
-            while komputer.punkty_gracza < 18:
+            if komputer.punkty_gracza < 18:
                 karta_komputera = komputer.wylosuj_karte(karty)
                 komputer.zliczanie()
                 pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
                 pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
             self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
-        self.duze_punkty_dodawanie(gracz,komputer)
+        if gracz.punkty_gracza > komputer.punkty_gracza:
+            gracz.duze_pkt_gracza += 1
+            self.zerowanie()
+        elif komputer.punkty_gracza < gracz.punkty_gracza:
+            komputer.duze_pkt_gracza += 1
+            self.zerowanie()
+        else:
+            True
 
         if gracz.duze_pkt_gracza == 21:
             messagebox.showinfo("Wygrana!","Zdobyłeś 21 dużych punktów!")
