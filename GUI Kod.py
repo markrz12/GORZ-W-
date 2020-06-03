@@ -1,4 +1,3 @@
-
 from tkinter import *
 from PIL import Image, ImageTk
 import random
@@ -68,8 +67,12 @@ class GameMainWindow():
         self.duze_punkty_komputera_var.set(str(komputer.duze_pkt_gracza))
 
 
+
 ### Otwieranie okna z grą
     def open_main_game_window(self):
+
+        self.start = time.time()
+
         self.main_game_window = Toplevel(root)
         self.main_game_window.title("Gra w Oczko")
         self.main_game_window.geometry("1980x1080")
@@ -104,6 +107,7 @@ class GameMainWindow():
 
         self.checking_button = Button(self.main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
         self.checking_button.pack(side = BOTTOM)
+
 
     # zerowanie zwykłych punktów i kart, widocznych na ekranie po nowej rozgrywce
 
@@ -142,8 +146,26 @@ class GameMainWindow():
         self.duze_punkty_gracza_var.set(str(gracz.duze_pkt_gracza))
         self.duze_punkty_komputera_var.set(str(komputer.duze_pkt_gracza))
 
+    def odliczanie_czasu(self):
+        time.time()
+        if time.time() - self.start >= 3600:
+            if gracz.duze_pkt_gracza > komputer.duze_pkt_gracza:
+                messagebox.showinfo("Koniec Czasu! Wygrana!","Skończył się czas. Masz więcej dużych punktów od komputera!")
+                self.checking_button['state'] = DISABLED
+                self.taking_card_button['state'] = DISABLED
+            elif komputer.duze_pkt_gracza > gracz.duze_pkt_gracza:
+                messagebox.showinfo("Koniec Czasu! Przegrałeś!","Skończył się czas. Komputer ma więcej dużych punktów!")
+                self.checking_button['state'] = DISABLED
+                self.taking_card_button['state'] = DISABLED
+            else:
+                messagebox.showinfo("Koniec Czasu! Remis!","Skończył się czas. Ty i komputer remisujecie!")
+                self.checking_button['state'] = DISABLED
+                self.taking_card_button['state'] = DISABLED
+
+
     # funkcja dobierz karte w oknie gry
     def take_card(self):
+        self.odliczanie_czasu()
         if len(karty) > 0:
             karta_gracza = gracz.wylosuj_karte(karty)
             gracz.zliczanie()
@@ -174,6 +196,7 @@ class GameMainWindow():
 
     #funkcja sprawdz w oknie gry
     def check_out(self):
+        self.odliczanie_czasu()
         if len(karty)>0:
             while komputer.punkty_gracza < 18:
                 karta_komputera = komputer.wylosuj_karte(karty)
@@ -193,8 +216,8 @@ class GameMainWindow():
             self.checking_button['state'] = DISABLED
             self.taking_card_button['state'] = DISABLED
 
-gameMainWindow = GameMainWindow()
 
+gameMainWindow = GameMainWindow()
 
 ### Otwieranie okna z zasadami gry
 def open_game_rules_window():
