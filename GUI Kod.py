@@ -15,6 +15,7 @@ class Gracz():
 
     def wylosuj_karte(self, talia):           # dzięki temu karty nie będą się powtarzać
         los = random.choice(talia)
+        kosz_na_karty.append(los)
         talia.remove(los)
         self.talia_gracza.append(los)
         return los
@@ -51,6 +52,7 @@ karty = ["9_t", "10_t", "W_t", "D_t", "K_t", "A_t",
 "9_ka", "10_ka", "W_ka", "D_ka", "K_ka", "A_ka",
 "9_ki", "10_ki", "W_ki", "D_ki", "K_ki", "A_ki",
 "9_p", "10_p", "W_p", "D_p", "K_p", "A_p"]
+kosz_na_karty = []
 gracz = Gracz()
 komputer = Gracz()
 
@@ -123,6 +125,10 @@ class GameMainWindow():
         komputer.punkty_gracza = 0
         gracz.talia_gracza = []
         komputer.talia_gracza = []
+        for i in kosz_na_karty:
+            karty.append(i)
+            kosz_na_karty.remove(i)
+
         # W tym przypadku karty z poprzedniej rozgrywki nie znikają, a na nie nakładają się nowe. Może wiecie jak usunąć Label, który jest pod spodem? :<
         # Szybko też kończy się talia. Trzeba chyba dodawać nową przy każdej rozgrywce po nowym dużym punkcie
 
