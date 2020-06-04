@@ -131,6 +131,12 @@ class GameMainWindow():
         self.main_game_window.quit()
 
     def duze_punkty_dodawanie(self,gracz,komputer):
+        if len(gracz.talia_gracza) == 2 and gracz.punkty_gracza == 22:
+            gracz.duze_pkt_gracza += 1
+            self.zerowanie()
+        elif len(komputer.talia_gracza) == 2 and komputer.punkty_gracza == 22:
+            komputer.duze_pkt_gracza += 1
+            self.zerowanie()
         if gracz.punkty_gracza == 21:
             gracz.duze_pkt_gracza +=1
             self.zerowanie()
