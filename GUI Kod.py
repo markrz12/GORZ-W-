@@ -119,6 +119,7 @@ class GameMainWindow():
     # zerowanie zwykłych punktów i kart, widocznych na ekranie po nowej rozgrywce
 
     def zerowanie(self):
+        time.sleep(2)
         gracz.punkty_gracza = 0
         komputer.punkty_gracza = 0
         gracz.talia_gracza = []
