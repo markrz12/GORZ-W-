@@ -96,10 +96,7 @@ class GameMainWindow():
         duze_punkty_gracza.place(x=1050, y=28)
 
         #Punkty i talia komputera
-        punkty_komputera_tekst = Label(self.main_game_window, text= "Punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
-        punkty_komputera_tekst.place(x=28, y=400)
-        punkty_komputera = Label(self.main_game_window, textvariable =self.punkty_komputera_var, font =("Times New Roman", 20), foreground = "white", background = "black")
-        punkty_komputera.place(x=250, y=400)
+
 
         duze_punkty_komputera_tekst = Label(self.main_game_window, text = "Duże punkty komputera:", font =("Times New Roman", 20), foreground = "white", background = "black")
         duze_punkty_komputera_tekst.place(x=800, y=400)
@@ -139,55 +136,39 @@ class GameMainWindow():
         if len(gracz.talia_gracza) == 2 and gracz.punkty_gracza == 22:
             if len(komputer.talia_gracza) == 2 and komputer.punkty_gracza == 22:
                 self.zerowanie() #remis
-                self.pokaz_pkt_komputera()
             else:
                 gracz.duze_pkt_gracza += 1
                 self.zerowanie()
-                self.pokaz_pkt_komputera()
         elif len(komputer.talia_gracza) == 2 and komputer.punkty_gracza == 22:
             komputer.duze_pkt_gracza += 1
             self.zerowanie()
-            self.pokaz_pkt_komputera()
-
         elif gracz.punkty_gracza == 21:
             if komputer.punkty_gracza == 21:
                 self.zerowanie() #remis
-                self.pokaz_pkt_komputera()
             else:
                 gracz.duze_pkt_gracza +=1
                 self.zerowanie()
-                self.pokaz_pkt_komputera()
         elif komputer.punkty_gracza == 21:
             komputer.duze_pkt_gracza += 1
             self.zerowanie()
-            self.pokaz_pkt_komputera()
-
         elif gracz.punkty_gracza == 21:
             if komputer.punkty_gracza == 21:
                 self.zerowanie() #remis
-                self.pokaz_pkt_komputera()
             else:
                 gracz.duze_pkt_gracza +=1
                 self.zerowanie()
-                self.pokaz_pkt_komputera()
         elif komputer.punkty_gracza == 21:
             komputer.duze_pkt_gracza += 1
             self.zerowanie()
-            self.pokaz_pkt_komputera()
-
         elif gracz.punkty_gracza > 21:
             if komputer.punkty_gracza >21:
                 self.zerowanie() #remis
-                self.pokaz_pkt_komputera()
             else:
                 komputer.duze_pkt_gracza += 1
                 self.zerowanie()
-                self.pokaz_pkt_komputera()
         elif komputer.punkty_gracza > 21:
             gracz.duze_pkt_gracza += 1
             self.zerowanie()
-            self.pokaz_pkt_komputera()
-
         else:
             True
 
