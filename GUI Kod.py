@@ -120,7 +120,6 @@ class GameMainWindow():
     # zerowanie zwykłych punktów i kart, widocznych na ekranie po nowej rozgrywce
 
     def zerowanie(self):
-        time.sleep(1) #żeby było widać, co zniknie, nim zniknie
         gracz.punkty_gracza = 0
         komputer.punkty_gracza = 0
         gracz.talia_gracza = []
@@ -137,24 +136,47 @@ class GameMainWindow():
         self.main_game_window.quit()
 
     def duze_punkty_dodawanie(self,gracz,komputer):
+
         if len(gracz.talia_gracza) == 2 and gracz.punkty_gracza == 22:
-            gracz.duze_pkt_gracza += 1
-            self.zerowanie()
+            if len(komputer.talia_gracza) == 2 and komputer.punkty_gracza == 22:
+                self.zerowanie() #remis
+            else:
+                gracz.duze_pkt_gracza += 1
+                self.zerowanie()
         elif len(komputer.talia_gracza) == 2 and komputer.punkty_gracza == 22:
             komputer.duze_pkt_gracza += 1
             self.zerowanie()
-        if gracz.punkty_gracza == 21:
-            gracz.duze_pkt_gracza +=1
-            self.zerowanie()
+
+        elif gracz.punkty_gracza == 21:
+            if komputer.punkty_gracza == 21:
+                self.zerowanie() #remis
+            else:
+                gracz.duze_pkt_gracza +=1
+                self.zerowanie()
         elif komputer.punkty_gracza == 21:
-            komputer.duze_pkt_gracza +=1
+            komputer.duze_pkt_gracza += 1
             self.zerowanie()
+
+        elif gracz.punkty_gracza == 21:
+            if komputer.punkty_gracza == 21:
+                self.zerowanie() #remis
+            else:
+                gracz.duze_pkt_gracza +=1
+                self.zerowanie()
+        elif komputer.punkty_gracza == 21:
+            komputer.duze_pkt_gracza += 1
+            self.zerowanie()
+
         elif gracz.punkty_gracza > 21:
-            gracz.duze_pkt_gracza += 0
-            self.zerowanie()
+            if komputer.punkty_gracza >21:
+                self.zerowanie() #remis
+            else:
+                komputer.duze_pkt_gracza += 1
+                self.zerowanie()
         elif komputer.punkty_gracza > 21:
-            komputer.duze_pkt_gracza += 0
+            gracz.duze_pkt_gracza += 1
             self.zerowanie()
+
         else:
             True
 
@@ -222,14 +244,18 @@ class GameMainWindow():
                 pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
             self.punkty_komputera_var.set(str(komputer.punkty_gracza))
 
-        if gracz.punkty_gracza > komputer.punkty_gracza:
-            gracz.duze_pkt_gracza += 1
-            self.zerowanie()
-        elif komputer.punkty_gracza < gracz.punkty_gracza:
-            komputer.duze_pkt_gracza += 1
-            self.zerowanie()
+        if gracz.punkty_gracza <21 and komputer.punkty_gracza <21:
+            if gracz.punkty_gracza > komputer.punkty_gracza:
+                gracz.duze_pkt_gracza += 1
+                self.zerowanie()
+            elif gracz.punkty_gracza < komputer.punkty_gracza:
+                komputer.duze_pkt_gracza += 1
+                self.zerowanie()
+            else:
+                self.zerowanie() #remis
+
         else:
-            True
+            self.duze_punkty_dodawanie(gracz,komputer)
 
         if gracz.duze_pkt_gracza == 21:
             messagebox.showinfo("Wygrana!","Zdobyłeś 21 dużych punktów!")
