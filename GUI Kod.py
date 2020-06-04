@@ -78,6 +78,10 @@ class GameMainWindow():
         self.main_game_window.title("Gra w Oczko")
         self.main_game_window.geometry("1980x1080")
         self.main_game_window.configure(background = 'black')
+        self.punkty_i_przyciski()
+
+    def punkty_i_przyciski(self):
+
         Label(self.main_game_window, image = background_image).place(relwidth = 1, relheight = 1)
 
         #Punkty i talia gracza
@@ -112,11 +116,6 @@ class GameMainWindow():
         self.quit_button = Button(self.main_game_window,command = self.koniec, image = button7, background = 'black', overrelief = FLAT)
         self.quit_button.place(x = 1300, y = 490)
 
-
-
-
-
-
     # zerowanie zwykłych punktów i kart, widocznych na ekranie po nowej rozgrywce
 
     def zerowanie(self):
@@ -127,9 +126,8 @@ class GameMainWindow():
         for i in kosz_na_karty:
             karty.append(i)
             kosz_na_karty.remove(i)
+        self.punkty_i_przyciski()
 
-        # W tym przypadku karty z poprzedniej rozgrywki nie znikają, a na nie nakładają się nowe. Może wiecie jak usunąć Label, który jest pod spodem? :<
-        # Szybko też kończy się talia. Trzeba chyba dodawać nową przy każdej rozgrywce po nowym dużym punkcie
 
     # dodawanie dużego punktu
     def koniec(self):
