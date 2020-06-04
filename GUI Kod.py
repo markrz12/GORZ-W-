@@ -139,42 +139,54 @@ class GameMainWindow():
         if len(gracz.talia_gracza) == 2 and gracz.punkty_gracza == 22:
             if len(komputer.talia_gracza) == 2 and komputer.punkty_gracza == 22:
                 self.zerowanie() #remis
+                self.pokaz_pkt_komputera()
             else:
                 gracz.duze_pkt_gracza += 1
                 self.zerowanie()
+                self.pokaz_pkt_komputera()
         elif len(komputer.talia_gracza) == 2 and komputer.punkty_gracza == 22:
             komputer.duze_pkt_gracza += 1
             self.zerowanie()
+            self.pokaz_pkt_komputera()
 
         elif gracz.punkty_gracza == 21:
             if komputer.punkty_gracza == 21:
                 self.zerowanie() #remis
+                self.pokaz_pkt_komputera()
             else:
                 gracz.duze_pkt_gracza +=1
                 self.zerowanie()
+                self.pokaz_pkt_komputera()
         elif komputer.punkty_gracza == 21:
             komputer.duze_pkt_gracza += 1
             self.zerowanie()
+            self.pokaz_pkt_komputera()
 
         elif gracz.punkty_gracza == 21:
             if komputer.punkty_gracza == 21:
                 self.zerowanie() #remis
+                self.pokaz_pkt_komputera()
             else:
                 gracz.duze_pkt_gracza +=1
                 self.zerowanie()
+                self.pokaz_pkt_komputera()
         elif komputer.punkty_gracza == 21:
             komputer.duze_pkt_gracza += 1
             self.zerowanie()
+            self.pokaz_pkt_komputera()
 
         elif gracz.punkty_gracza > 21:
             if komputer.punkty_gracza >21:
                 self.zerowanie() #remis
+                self.pokaz_pkt_komputera()
             else:
                 komputer.duze_pkt_gracza += 1
                 self.zerowanie()
+                self.pokaz_pkt_komputera()
         elif komputer.punkty_gracza > 21:
             gracz.duze_pkt_gracza += 1
             self.zerowanie()
+            self.pokaz_pkt_komputera()
 
         else:
             True
@@ -215,7 +227,7 @@ class GameMainWindow():
                 karta_komputera= komputer.wylosuj_karte(karty)
                 komputer.zliczanie()
                 # talia komputera bedzie tutaj
-                pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
+                pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty_komputer(karta_komputera) ,background = "black")
                 pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
             self.punkty_gracza_var.set(str(gracz.punkty_gracza))
             self.punkty_komputera_var.set(str(komputer.punkty_gracza))
@@ -334,7 +346,7 @@ K_p = PhotoImage(file = 'images/krol-pik.png')
 A_p = PhotoImage(file = 'images/as-pik.png')
 druga_strona = PhotoImage(file = 'images/druga-strona.png')
 
-### Zwroc obazek dla karty
+### Zwrot obazków dla kart gracza
 def obrazek_dla_karty(karta):
     if karta == "9_t":
          return nine_t
@@ -384,6 +396,57 @@ def obrazek_dla_karty(karta):
         return K_p
     elif karta == "A_p":
         return A_p
+
+### Zwrot obrazków dla kart komputera (toporne maskowanie)
+def obrazek_dla_karty_komputer(karta):
+    if karta == "9_t":
+         return druga_strona
+    elif karta == "10_t":
+         return druga_strona
+    elif karta == "W_t":
+        return druga_strona
+    elif karta == "D_t":
+        return druga_strona
+    elif karta == "K_t":
+        return druga_strona
+    elif karta == "A_t":
+        return druga_strona
+    elif karta == "9_ka":
+         return druga_strona
+    elif karta == "10_ka":
+         return druga_strona
+    elif karta == "W_ka":
+        return druga_strona
+    elif karta == "D_ka":
+        return druga_strona
+    elif karta == "K_ka":
+        return druga_strona
+    elif karta == "A_ka":
+        return druga_strona
+    elif karta == "9_ki":
+         return druga_strona
+    elif karta == "10_ki":
+         return druga_strona
+    elif karta == "W_ki":
+        return druga_strona
+    elif karta == "D_ki":
+        return druga_strona
+    elif karta == "K_ki":
+        return druga_strona
+    elif karta == "A_ki":
+        return druga_strona
+    elif karta == "9_p":
+         return druga_strona
+    elif karta == "10_p":
+         return druga_strona
+    elif karta == "W_p":
+        return druga_strona
+    elif karta == "D_p":
+        return druga_strona
+    elif karta == "K_p":
+        return druga_strona
+    elif karta == "A_p":
+        return druga_strona
 
 ### Wyświetlanie logo
 logo_photo = Label(root, image = logo, background = 'black')
