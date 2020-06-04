@@ -113,7 +113,7 @@ class GameMainWindow():
         self.checking_button = Button(self.main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
         self.checking_button.place(x=1300, y=430)
 
-        self.quit_button = Button(self.main_game_window,command = self.koniec, image = button7, background = 'black', overrelief = FLAT)
+        self.quit_button = Button(self.main_game_window,command = self.koniec, image = button6, background = 'black', overrelief = FLAT)
         self.quit_button.place(x = 1300, y = 490)
 
     # zerowanie zwykłych punktów i kart, widocznych na ekranie po nowej rozgrywce
@@ -303,7 +303,7 @@ button1 = PhotoImage(file = 'images/button.png')
 button2 = PhotoImage(file = 'images/button_rules.png')
 button3 = PhotoImage(file = 'images/button_start.png')
 button4 = PhotoImage(file = 'images/button_dobierz.png')
-button5 = PhotoImage(file = 'images/button_sprawdz.png')
+button5 = PhotoImage(file = 'images/button_spasuj.png')
 button6 = PhotoImage(file = 'images/button_zakoncz.png')
 button7 = PhotoImage(file = 'images/button_wyjdz.png')
 
@@ -395,6 +395,9 @@ starting_button.pack(side = TOP)
 
 gamerules_button = Button(root, image = button2, command = open_game_rules_window, background = 'black', overrelief = FLAT)
 gamerules_button.pack(side = TOP)
+
+root_quit_button = Button(root, image = button7, command = root.quit, background = 'black', overrelief = FLAT)
+root_quit_button.pack(side = TOP)
 ### Stopka
 copyrights = Label(root, text = 'All rights reserved', foreground = 'white', background = 'black')
 copyrights.pack(side = BOTTOM)
