@@ -34,6 +34,7 @@ class Gracz():
                 self.punkty_gracza += 4
             else:               # Tu sa asy
                 self.punkty_gracza += 11
+        return self.punkty_gracza
 
         #
         # if len(self.talia_gracza) == 2 and self.punkty_gracza == 22:      # ten fragment nie musi być koniecznie tutaj, i napisany brzydko jest
@@ -44,7 +45,7 @@ class Gracz():
         #     print("Przekroczyłeś maksymalną liczbe punktów - przegrałeś")
         # else:
         #     print("Masz", self.punty_gracza, "punktów. Możesz dobrać kartę lub spasować")
-        return self.punkty_gracza
+
 
 karty = ["9_t", "10_t", "W_t", "D_t", "K_t", "A_t",
 "9_ka", "10_ka", "W_ka", "D_ka", "K_ka", "A_ka",
@@ -121,23 +122,21 @@ class GameMainWindow():
     # dodawanie dużego punktu
 
     def duze_punkty_dodawanie(self,gracz,komputer):
-        if gracz.punkty_gracza <= 21 and gracz.punkty_gracza > komputer.punkty_gracza:
-            gracz.duze_pkt_gracza += 1
+        if gracz.punkty_gracza == 21:
+            gracz.duze_pkt_gracza +=1
             self.zerowanie()
-        elif gracz.punkty_gracza >= 21 and gracz.punkty_gracza > komputer.punkty_gracza:
-            komputer.duze_pkt_gracza += 1
+        elif komputer.punkty_gracza == 21:
+            komputer.duze_pkt_gracza +=1
+            self.zerowanie()
+        elif gracz.punkty_gracza > 21:
+            gracz.duze_pkt_gracza += 0
+            self.zerowanie()
+        elif komputer.punkty_gracza > 21:
+            komputer.duze_pkt_gracza += 0
             self.zerowanie()
         else:
             True
 
-        # if komputer.punkty_gracza == 21:
-        #     komputer.duze_pkt_gracza += 1
-        #     self.zerowanie()
-        # elif komputer.punkty_gracza > 21:
-        #     gracz.duze_pkt_gracza += 1
-        #     self.zerowanie()
-        # else:
-        #     True
 
         self.punkty_gracza_var.set(str(gracz.punkty_gracza))
         self.punkty_komputera_var.set(str(komputer.punkty_gracza))
