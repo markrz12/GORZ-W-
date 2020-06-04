@@ -108,7 +108,7 @@ class GameMainWindow():
         self.checking_button.place(x=1300, y=430)
 
         self.quit_button = Button(self.main_game_window,command = self.koniec, image = button7, background = 'black', overrelief = FLAT)
-        self.quit_button.place(x = 1300, y = 510)
+        self.quit_button.place(x = 1300, y = 490)
 
 
 
