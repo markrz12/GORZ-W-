@@ -107,6 +107,13 @@ class GameMainWindow():
         self.checking_button = Button(self.main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
         self.checking_button.place(x=1300, y=430)
 
+        self.quit_button = Button(self.main_game_window,command = self.koniec, image = button7, background = 'black', overrelief = FLAT)
+        self.quit_button.place(x = 1300, y = 510)
+
+
+
+
+
 
     # zerowanie zwykłych punktów i kart, widocznych na ekranie po nowej rozgrywce
 
@@ -120,6 +127,8 @@ class GameMainWindow():
         # Szybko też kończy się talia. Trzeba chyba dodawać nową przy każdej rozgrywce po nowym dużym punkcie
 
     # dodawanie dużego punktu
+    def koniec(self):
+        self.main_game_window.quit()
 
     def duze_punkty_dodawanie(self,gracz,komputer):
         if gracz.punkty_gracza == 21:
@@ -349,9 +358,6 @@ starting_button.pack(side = TOP)
 
 gamerules_button = Button(root, image = button2, command = open_game_rules_window, background = 'black', overrelief = FLAT)
 gamerules_button.pack(side = TOP)
-
-quit_button = Button(root, image = button7, command = root.quit, background = 'black', overrelief = FLAT)
-quit_button.pack(side = TOP)
 ### Stopka
 copyrights = Label(root, text = 'All rights reserved', foreground = 'white', background = 'black')
 copyrights.pack(side = BOTTOM)
