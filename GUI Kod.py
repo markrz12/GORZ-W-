@@ -258,6 +258,8 @@ button2 = PhotoImage(file = 'images/button_rules.png')
 button3 = PhotoImage(file = 'images/button_start.png')
 button4 = PhotoImage(file = 'images/button_dobierz.png')
 button5 = PhotoImage(file = 'images/button_sprawdz.png')
+button6 = PhotoImage(file = 'images/button_zakoncz.png')
+button7 = PhotoImage(file = 'images/button_wyjdz.png')
 
 ### Pobieranie obrazków kart
 nine_t = PhotoImage(file = 'images/9-trefl.png')
