@@ -66,8 +66,6 @@ class GameMainWindow():
         self.duze_punkty_komputera_var = StringVar()
         self.duze_punkty_komputera_var.set(str(komputer.duze_pkt_gracza))
 
-
-
 ### Otwieranie okna z grą
     def open_main_game_window(self):
 
@@ -103,10 +101,10 @@ class GameMainWindow():
 
         ### Przyciski w oknie gry
         self.taking_card_button = Button(self.main_game_window, command = self.take_card, image = button4, background ='black', overrelief = FLAT)
-        self.taking_card_button.pack(side = BOTTOM)
+        self.taking_card_button.place(x= 1300, y= 370)
 
         self.checking_button = Button(self.main_game_window, command =self.check_out, image = button5, background = 'black', overrelief = FLAT)
-        self.checking_button.pack(side = BOTTOM)
+        self.checking_button.place(x=1300, y=430)
 
 
     # zerowanie zwykłych punktów i kart, widocznych na ekranie po nowej rozgrywce
@@ -123,23 +121,23 @@ class GameMainWindow():
     # dodawanie dużego punktu
 
     def duze_punkty_dodawanie(self,gracz,komputer):
-        if gracz.punkty_gracza == 21:
+        if gracz.punkty_gracza <= 21 and gracz.punkty_gracza > komputer.punkty_gracza:
             gracz.duze_pkt_gracza += 1
             self.zerowanie()
-        elif gracz.punkty_gracza > 21:
+        elif gracz.punkty_gracza >= 21 and gracz.punkty_gracza > komputer.punkty_gracza:
             komputer.duze_pkt_gracza += 1
             self.zerowanie()
         else:
             True
 
-        if komputer.punkty_gracza == 21:
-            komputer.duze_pkt_gracza += 1
-            self.zerowanie()
-        elif komputer.punkty_gracza > 21:
-            gracz.duze_pkt_gracza += 1
-            self.zerowanie()
-        else:
-            True
+        # if komputer.punkty_gracza == 21:
+        #     komputer.duze_pkt_gracza += 1
+        #     self.zerowanie()
+        # elif komputer.punkty_gracza > 21:
+        #     gracz.duze_pkt_gracza += 1
+        #     self.zerowanie()
+        # else:
+        #     True
 
         self.punkty_gracza_var.set(str(gracz.punkty_gracza))
         self.punkty_komputera_var.set(str(komputer.punkty_gracza))
@@ -221,6 +219,7 @@ class GameMainWindow():
             messagebox.showinfo("Przegrałeś!","Komputer zdobył 21 dużych punktów przed tobą!")
             self.checking_button['state'] = DISABLED
             self.taking_card_button['state'] = DISABLED
+
 
 
 gameMainWindow = GameMainWindow()
