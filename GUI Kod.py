@@ -348,6 +348,8 @@ starting_button.pack(side = TOP)
 gamerules_button = Button(root, image = button2, command = open_game_rules_window, background = 'black', overrelief = FLAT)
 gamerules_button.pack(side = TOP)
 
+quit_button = Button(root, image = button7, command = root.quit, background = 'black', overrelief = FLAT)
+quit_button.pack(side = TOP)
 ### Stopka
 copyrights = Label(root, text = 'All rights reserved', foreground = 'white', background = 'black')
 copyrights.pack(side = BOTTOM)
