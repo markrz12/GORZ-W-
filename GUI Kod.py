@@ -21,7 +21,7 @@ class Gracz():
         self.talia_gracza.append(los)
         return los
 
-    def zliczanie(self): # tu zliczamy punkty na kazdej rece
+    def zliczanie(self): # zliczanie punktów z talii graczy
 
         self.punkty_gracza = 0
         for i in self.talia_gracza:
@@ -92,7 +92,7 @@ class GameMainWindow():
                 karta_komputera= komputer.wylosuj_karte(karty)
                 komputer.zliczanie()
 
-            # Zakryte karty komputera
+            # Widok kart komputera
                 pierwsza_karta_komputera = Label(self.main_game_window, image= obrazek_dla_karty(karta_komputera) ,background = "black")
                 pierwsza_karta_komputera.place(x= len(komputer.talia_gracza)*50, y=450)
 
@@ -144,8 +144,6 @@ class GameMainWindow():
             messagebox.showinfo("Przegrałeś!","Komputer zdobył 21 dużych punktów przed tobą!")
             self.checking_button['state'] = DISABLED
             self.taking_card_button['state'] = DISABLED
-
-
 
     # Zamykanie okna:
 
