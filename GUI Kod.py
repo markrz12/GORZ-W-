@@ -102,10 +102,14 @@ class GameMainWindow():
             self.duze_punkty_dodawanie(gracz,komputer)
 
             if gracz.duze_pkt_gracza == 21:
+                obraz_wygranej = Label(self.main_game_window, image= wygrana ,background = "black")
+                obraz_wygranej.place(x=1000, y=1000)
                 messagebox.showinfo("Wygrana!","Zdobyłeś 21 dużych punktów!")
                 self.checking_button['state'] = DISABLED
                 self.taking_card_button['state'] = DISABLED
             if komputer.duze_pkt_gracza == 21:
+                obraz_przegranej = Label(self.main_game_window, image= przegrana ,background = "black")
+                obraz_przegranej.place(x=1000, y=1000)
                 messagebox.showinfo("Przegrałeś!","Komputer zdobył 21 dużych punktów przed tobą!")
                 self.checking_button['state'] = DISABLED
                 self.taking_card_button['state'] = DISABLED
@@ -137,10 +141,14 @@ class GameMainWindow():
             self.duze_punkty_dodawanie(gracz,komputer)
 
         if gracz.duze_pkt_gracza == 21:
+            obraz_wygranej = Label(self.main_game_window, image= wygrana ,background = "black")
+            obraz_wygranej.place(x=500, y=500)
             messagebox.showinfo("Wygrana!","Zdobyłeś 21 dużych punktów!")
             self.checking_button['state'] = DISABLED
             self.taking_card_button['state'] = DISABLED
         if komputer.duze_pkt_gracza == 21:
+            obraz_przegranej = Label(self.main_game_window, image= przegrana ,background = "black")
+            obraz_przegranej.place(x=500, y=500)
             messagebox.showinfo("Przegrałeś!","Komputer zdobył 21 dużych punktów przed tobą!")
             self.checking_button['state'] = DISABLED
             self.taking_card_button['state'] = DISABLED
@@ -246,16 +254,22 @@ class GameMainWindow():
     ### Po 60 minutach gra się kończy:
 
     def odliczanie_czasu(self):
-        if time.time() - self.start >= 3600:
+        if time.time() - self.start >= 10:
             if gracz.duze_pkt_gracza > komputer.duze_pkt_gracza:
+                obraz_wygranej = Label(self.main_game_window, image= wygrana ,background = "black")
+                obraz_wygranej.place(x=500, y=500)
                 messagebox.showinfo("Koniec Czasu! Wygrana!","Skończył się czas. Masz więcej dużych punktów od komputera!")
                 self.checking_button['state'] = DISABLED
                 self.taking_card_button['state'] = DISABLED
             elif komputer.duze_pkt_gracza > gracz.duze_pkt_gracza:
+                obraz_przegranej = Label(self.main_game_window, image= przegrana ,background = "black")
+                obraz_przegranej.place(x=500, y=500)
                 messagebox.showinfo("Koniec Czasu! Przegrałeś!","Skończył się czas. Komputer ma więcej dużych punktów!")
                 self.checking_button['state'] = DISABLED
                 self.taking_card_button['state'] = DISABLED
             else:
+                obraz_remisu = Label(self.main_game_window, image= remis ,background = "black")
+                obraz_remisu.place(x=500, y=500)
                 messagebox.showinfo("Koniec Czasu! Remis!","Skończył się czas. Ty i komputer remisujecie!")
                 self.checking_button['state'] = DISABLED
                 self.taking_card_button['state'] = DISABLED
@@ -327,6 +341,11 @@ K_p = PhotoImage(file = 'images/krol-pik.png')
 A_p = PhotoImage(file = 'images/as-pik.png')
 druga_strona = PhotoImage(file = 'images/druga-strona.png')
 
+### Obrazki wygranej i przegranej:
+
+wygrana = PhotoImage(file = 'images/wygrana_Rusin.png')
+przegrana = PhotoImage(file = 'images/przegrana_Britney.png')
+remis = PhotoImage(file = 'images/remis_Jakjejtam.png')
 ### Zwracanie obrazków dla kart:
 
 def obrazek_dla_karty(karta):
